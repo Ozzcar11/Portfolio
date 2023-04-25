@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ref } from "vue"
 const onLoad: Ref<boolean> = ref(true)
-const random: number = Math.random() * 250 + 700
+const random: number = Math.random() * 150 + 500
 const burgerLeft: Ref<boolean> = ref(false)
 const loaderFade: Ref<boolean> = ref(false)
 const loaderEnd: Ref<boolean> = ref(false)
@@ -20,7 +20,7 @@ setTimeout(() => {
 
 setTimeout(() => {
    loaderEnd.value = true
-}, random + 2500)
+}, random + 1500)
 </script>
 
 
@@ -52,17 +52,17 @@ setTimeout(() => {
       bottom: 0;
       left: 0;
       right: 0;
-      transition: right 1s ease-in-out;
+      transition: right 0.6s ease-in-out;
    }
 
    &__item-first {
       background-color: #1C1D25;
-      z-index: 10;
+      z-index: 30;
    }
 
    &__item-second {
       background-color: #242424;
-      z-index: -10;
+      z-index: 10;
    }
 
    &-left {
@@ -72,7 +72,7 @@ setTimeout(() => {
    &-fade {
       .loader__item {
          background-color: transparent;
-         transition: background-color 1s ease-in-out 0.5s;
+         transition: background-color 0.6s ease-in-out;
       }
    }
 
@@ -81,6 +81,7 @@ setTimeout(() => {
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+      z-index: 20;
 
       &__item {
          position: relative;
@@ -102,15 +103,11 @@ setTimeout(() => {
             background-color: #fff;
             width: 200%;
             height: 100%;
-            transition: left 1.4s cubic-bezier(1, 0, 0.4, 1);
+            transition: left 0.8s cubic-bezier(1, 0, 0.4, 1);
 
             &.left {
                left: 100%;
             }
-         }
-
-         &+& {
-            margin-top: 10px;
          }
 
          &:last-child {
