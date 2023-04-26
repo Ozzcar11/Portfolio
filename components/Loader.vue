@@ -2,118 +2,127 @@
 import { ref } from "vue"
 const onLoad: Ref<boolean> = ref(true)
 const random: number = Math.random() * 150 + 500
-const burgerLeft: Ref<boolean> = ref(false)
+const burgerTop: Ref<boolean> = ref(false)
 const loaderFade: Ref<boolean> = ref(false)
 const loaderEnd: Ref<boolean> = ref(false)
 
 setTimeout(() => {
-  burgerLeft.value = true
+   burgerTop.value = true
 }, 100)
 
 setTimeout(() => {
-  onLoad.value = false
+   onLoad.value = false
 }, random)
 
 setTimeout(() => {
-  loaderFade.value = true
+   loaderFade.value = true
 }, random + 1000)
 
 setTimeout(() => {
-  loaderEnd.value = true
+   loaderEnd.value = true
 }, random + 1500)
 </script>
 
 <template>
-  <div v-if="!loaderEnd" class="loader" :class="{ 'loader-fade': loaderFade }">
-    <div
-      class="loader__item loader__item-first"
-      :class="{ 'loader-left': onLoad }"
-    ></div>
-    <div v-if="!loaderFade" class="loader-burger">
-      <div v-for="index in 3" :key="index" class="loader-burger__item">
-        <div :class="{ left: burgerLeft }"></div>
+   <!-- v-if="!loaderEnd" -->
+   <div class="loader"
+      :class="{ 'loader-fade': loaderFade }">
+      <div class="loader__item loader__item-first"
+         :class="{ 'loader-top': onLoad }"></div>
+      <!-- v-if="!loaderFade" -->
+      <div class="loader-burger">
+         <div v-for="index in 5"
+            :key="index"
+            class="loader-burger__item">
+            <div :class="{ 'top': burgerTop }"></div>
+         </div>
       </div>
-    </div>
-    <div class="loader__item loader__item-second"></div>
-    <div class=""></div>
-  </div>
+      <div class="loader__item loader__item-second"></div>
+      <div class=""></div>
+   </div>
 </template>
 
 <style lang="scss" scoped>
 .loader {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  &__item {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    transition: right 0.6s ease-in-out;
-  }
+   position: fixed;
+   top: 0;
+   bottom: 0;
+   left: 0;
+   right: 0;
 
-  &__item-first {
-    background-color: #1c1d25;
-    z-index: 30;
-  }
+   &__item {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      transition: top 0.6s ease-in-out;
+   }
 
-  &__item-second {
-    background-color: #242424;
-    z-index: 10;
-  }
+   &__item-first {
+      background-color: #1c1d25;
+      z-index: 30;
+   }
 
-  &-left {
-    right: 100%;
-  }
+   &__item-second {
+      background-color: #242424;
+      z-index: 10;
+   }
 
-  &-fade {
-    .loader__item {
-      background-color: transparent;
-      transition: background-color 0.6s ease-in-out;
-    }
-  }
+   &-top {
+      top: 100%;
+   }
 
-  &-burger {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 20;
-
-    &__item {
-      position: relative;
-      width: 200px;
-      height: 25px;
-      overflow: hidden;
-
-      &:nth-child(2) > div {
-        transition-delay: 0.2s;
+   &-fade {
+      .loader__item {
+         background-color: transparent;
+         transition: background-color 0.6s ease-in-out;
       }
+   }
 
-      &:nth-child(3) > div {
-        transition-delay: 0.2s;
+   &-burger {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      display: flex;
+      transform: translate(-50%, -50%);
+      z-index: 20;
+
+      &__item {
+         position: relative;
+         width: 25px;
+         height: 200px;
+         overflow: hidden;
+
+
+         &:nth-child(2)>div,
+         &:nth-child(4)>div {
+            transition-delay: 0.1s;
+         }
+
+         &:nth-child(1)>div,
+         &:nth-child(5)>div {
+            transition-delay: 0.15s;
+         }
+
+         &:nth-child(3)>div {
+            transition-delay: 0.05s;
+         }
+
+         &>div {
+            position: absolute;
+            top: 100%;
+            background-color: #fff;
+            width: 100%;
+            height: 200%;
+            transition: top 0.8s cubic-bezier(1, 0, 0.4, 1);
+
+            &.top {
+               top: -200%;
+            }
+         }
+
       }
-
-      & > div {
-        position: absolute;
-        left: -200%;
-        background-color: #fff;
-        width: 200%;
-        height: 100%;
-        transition: left 0.8s cubic-bezier(1, 0, 0.4, 1);
-
-        &.left {
-          left: 100%;
-        }
-      }
-
-      &:last-child {
-        width: 125px;
-      }
-    }
-  }
+   }
 }
 </style>
