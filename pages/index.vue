@@ -15,7 +15,6 @@ setTimeout(() => {
       <h1 class="main__title" :class="{ 'is-reveal': isReveal }">
         Daniyalov Atav
       </h1>
-      "
       <p class="main__desc" :class="{ 'is-reveal-desc': isReveal }">
         Front-end developer
       </p>
